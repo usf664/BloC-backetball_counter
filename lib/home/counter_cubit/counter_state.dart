@@ -1,3 +1,5 @@
+part of 'counter_cubit.dart';
+
 abstract class CounterState {
   final int counterA;
   final int counterB;

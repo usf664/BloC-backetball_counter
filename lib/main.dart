@@ -37,33 +37,9 @@ class HomeScaffold extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(
-                height: 500,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const Text('Team A', style: TextStyle(fontSize: 32)),
-                    Text(
-                      context.watch<CounterCubit>().state.counterA.toString(),
-                      style: const TextStyle(fontSize: 150),
-                    ),
-                    MyButton(
-                      onPressed: () =>
-                          context.read<CounterCubit>().increment('A', 1),
-                      label: 'Add 1 Point',
-                    ),
-                    MyButton(
-                      onPressed: () =>
-                          context.read<CounterCubit>().increment('A', 2),
-                      label: 'Add 2 Point',
-                    ),
-                    MyButton(
-                      onPressed: () =>
-                          context.read<CounterCubit>().increment('A', 3),
-                      label: 'Add 3 Point',
-                    ),
-                  ],
-                ),
+              TeamErea(
+                label: context.watch<CounterCubit>().state.counterA.toString(),
+                teamName: 'A',
               ),
               const SizedBox(
                 height: 500,
@@ -74,33 +50,9 @@ class HomeScaffold extends StatelessWidget {
                   thickness: 1,
                 ),
               ),
-              SizedBox(
-                height: 500,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const Text('Team B', style: TextStyle(fontSize: 32)),
-                    Text(
-                      context.watch<CounterCubit>().state.counterB.toString(),
-                      style: const TextStyle(fontSize: 150),
-                    ),
-                    MyButton(
-                      onPressed: () =>
-                          context.read<CounterCubit>().increment('B', 1),
-                      label: 'Add 1 Point',
-                    ),
-                    MyButton(
-                      onPressed: () =>
-                          context.read<CounterCubit>().increment('B', 2),
-                      label: 'Add 2 Point',
-                    ),
-                    MyButton(
-                      onPressed: () =>
-                          context.read<CounterCubit>().increment('B', 3),
-                      label: 'Add 3 Point',
-                    ),
-                  ],
-                ),
+              TeamErea(
+                label: context.watch<CounterCubit>().state.counterB.toString(),
+                teamName: 'B',
               ),
             ],
           ),
@@ -109,6 +61,41 @@ class HomeScaffold extends StatelessWidget {
             onPressed: () {
               context.read<CounterCubit>().reset();
             },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TeamErea extends StatelessWidget {
+  const TeamErea({super.key, required this.teamName, required this.label});
+  final String teamName;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 500,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text('Team $teamName', style: const TextStyle(fontSize: 32)),
+          Text(label, style: const TextStyle(fontSize: 150)),
+          MyButton(
+            onPressed: () =>
+                context.read<CounterCubit>().increment(teamName, 1),
+            label: 'Add 1 Point',
+          ),
+          MyButton(
+            onPressed: () =>
+                context.read<CounterCubit>().increment(teamName, 2),
+            label: 'Add 2 Point',
+          ),
+          MyButton(
+            onPressed: () =>
+                context.read<CounterCubit>().increment(teamName, 3),
+            label: 'Add 3 Point',
           ),
         ],
       ),
